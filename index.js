@@ -6,17 +6,16 @@ const start = require('./routers/start')
 const fs = require('fs')
 const lang_from = require('./routers/ask_from')
 const lang_to = require('./routers/ask_to')
-const info = {
-        users:[]
-    }
+const json_file = fs.readFileSync('info.json')
+const info = JSON.parse(json_file)
 const bot = new Telegraf("1754116833:AAGN9zDyDHurMo0Dkgx3JwNo6b4Hio9rXag")
 var translate = require('node-google-translate-skidz');
+console.log(info);
 
 bot.start((ctx) => start(ctx, Markup))
 bot.on('message', async (ctx) => {
     let is_active = await ctx.telegram.getChatMember('@dunyo_texno', ctx.from.id)
     console.log(ctx.message);
-    console.log(is_active);
     if (is_active.status == 'member') {
         let text = ctx.message.text
         let user = info.users.find(e => e.id == ctx.message.from.id)
@@ -30,7 +29,10 @@ bot.on('message', async (ctx) => {
             user.txt = ctx.message.text
             user.waiting = false
             lang_to(ctx, info)
+            console.log(info);
         }
+        let data = JSON.stringify(info);
+        fs.writeFileSync('info.json', data, null, 2);
     }else {
         ctx.reply('Botdan foydalanish uchun kanalimizga a`zo bo`ling. Kanal linki @dunyo_texno')
     }
