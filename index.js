@@ -6,11 +6,9 @@ const start = require('./routers/start')
 const fs = require('fs')
 const lang_from = require('./routers/ask_from')
 const lang_to = require('./routers/ask_to')
-const info = [
-    {
+const info = {
         users:[]
     }
-]
 const bot = new Telegraf("1754116833:AAGN9zDyDHurMo0Dkgx3JwNo6b4Hio9rXag")
 var translate = require('node-google-translate-skidz');
 
