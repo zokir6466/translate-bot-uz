@@ -11,6 +11,7 @@ const info = JSON.parse(json_file)
 const bot = new Telegraf("1754116833:AAGN9zDyDHurMo0Dkgx3JwNo6b4Hio9rXag")
 var translate = require('node-google-translate-skidz');
 console.log(info);
+require("./keep-alive")
 
 bot.start((ctx) => start(ctx, Markup))
 bot.on('message', async (ctx) => {
