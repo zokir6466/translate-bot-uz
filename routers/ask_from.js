@@ -49,7 +49,7 @@ function lang_from(ctx, lang, info) {
         }
     }
     let data = JSON.stringify(info);
-    fs.writeFileSync('info.json', data, null, 2);
+    fs.writeFileSync('../info.json', data, null, 2);
 }
 
 
