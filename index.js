@@ -8,11 +8,12 @@ const lang_from = require('./routers/ask_from')
 const lang_to = require('./routers/ask_to')
 const json_file = fs.readFileSync('info.json')
 const info = JSON.parse(json_file)
+const express = require('express')
+const app = express()
 const bot = new Telegraf("1754116833:AAGN9zDyDHurMo0Dkgx3JwNo6b4Hio9rXag")
 var translate = require('node-google-translate-skidz');
 console.log(info);
-// require("./keep-alive")
-
+require('./keep-alive')
 bot.start((ctx) => start(ctx, Markup))
 bot.on('message', async (ctx) => {
     let is_active = await ctx.telegram.getChatMember('@dunyo_texno', ctx.from.id)
@@ -38,7 +39,7 @@ bot.on('message', async (ctx) => {
         ctx.reply('Botdan foydalanish uchun kanalimizga a`zo bo`ling. Kanal linki @dunyo_texno')
     }
 })
-
+app.get('/', (req,res) => res.send('home page'))
 bot.on('callback_query', async (ctx) => {
     let user = info.users.find(e => e.id == ctx.update.callback_query.from.id)
     let to_lang = ctx.update.callback_query.data
@@ -52,5 +53,5 @@ bot.on('callback_query', async (ctx) => {
     });
 
 })
-
+app.listen(8100)
 bot.launch()
