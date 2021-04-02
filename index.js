@@ -53,5 +53,5 @@ bot.on('callback_query', async (ctx) => {
     });
 
 })
-app.listen(8100)
+app.listen(8100, console.log('BOTTTTTTTTTTTTTT'))
 bot.launch()
