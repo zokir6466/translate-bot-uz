@@ -31,7 +31,11 @@ bot.on('message', async (ctx) => {
             user.txt = ctx.message.text
             user.waiting = false
             lang_to(ctx, info)
-            console.log(info);
+        }else {
+            user.txt = ctx.message.text
+            user.waiting = false
+            lang_to(ctx, info)
+
         }
         let data = JSON.stringify(info);
         fs.writeFileSync('info.json', data, null, 2);
@@ -53,5 +57,5 @@ bot.on('callback_query', async (ctx) => {
     });
 
 })
-app.listen(8100, console.log('BOTTTTTTTTTTTTTT'))
+app.listen(8100)
 bot.launch()
